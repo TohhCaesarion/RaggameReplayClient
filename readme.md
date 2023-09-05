@@ -10,7 +10,7 @@
 
 ### Как запустить
 
-1. Склонируйте репозиторий с Github. У вас должен быть установлен и настроен git lfs, для того чтобы скачались .grf файлы.
+1. Склонируйте репозиторий с Github.
    
 2. Установите vcredist через **vcredist/install_all.bat**.
 
@@ -49,7 +49,7 @@ This build also includes an archive of over 2000 replay files. These recordings 
 
 ### How to Run
 
-1. Сlone the repository from GitHub. You should have git lfs installed to download .grf files.
+1. Сlone the repository from GitHub.
 
 2. Install vcredist through `vcredist/install_all.bat`.
 
