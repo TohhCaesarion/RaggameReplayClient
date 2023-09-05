@@ -1,0 +1,158 @@
+AzzyUtil.lua
+Documentation
+AzzyUtil.lua contains all of the functionality of the Util.lua file included with the default AI, and fixes some problems associated with the fact that the developers cant code AI's any better than the rest of RO. Util.lua can be replaced with AzzyUtil.lua without problems. 
+
+
+--########################
+--### Friend Functions ###
+--########################
+IsFriend, IsFriendOrSelf, and GetFriendTargets assume the presense of a global variable named MyFriends containing a table of values of the format MyFriends[actor ID]=1. 
+
+function IsFriend(id)
+Returns 1 if id is a friend or owner
+
+function IsFriendOrSelf(id)
+Returns 1 if id is a friend, owner, or the homun/merc.
+
+function IsPlayer(id)
+Returns 1 if id is a player (not guaranteed to be accurate)
+
+function IsHomun(myid)
+Returns 1 if the actor controlled by this AI is a homun, otherwise, returns 0. 
+
+function GetFriendTargets()
+Returns list of targets of friends who are attacking
+
+--########################
+--### Monster functions###
+--########################
+function GetMobCount(id,range,id2)
+Returns the number of monsters within [range] of id and id2. 
+
+function GetBestBrandishTarget(myid)
+Returns the target to attack with brandish that will hit the most monsters. 
+
+function IsHiddenOnScreen(myid) --Disabled, always returns 1
+Returns 1 if there are any hidden monsters or players on screen. 
+This is currently disabled due to concerns over legality and balance. 
+
+function IsNotKS(myid,target)
+Returns 1 if attacking target would not result in a kill steal.
+
+--########################
+--### HP/SP % functions###
+--########################
+function HPPercent(id)
+function SPPercent(id)
+
+--########################
+--### Spacial functions###
+--########################
+These functions return information related to distances and locations
+
+function GetDistance (x1,y1,x2,y2)
+Returns the distance between (x1,y1) and (x2,y2)
+
+function GetDistance2 (id1, id2)
+Returns the distance between id1 and id2. 
+
+function GetDistance3 (id1,id2) 
+As GetDistance2, only does not round.
+
+function IsToRight(id1,id2)
+Returns 1 if id1 is 1 cell to the east of id2.
+
+function GetOwnerPosition (id)
+Returns the position of the owner. 
+This is required for backwards compatability; it is equivilent to GetV(V_Position,GetV(V_Owner,myid))
+
+function GetDistanceFromOwner (id)
+Returns the distance between id and the owner of the homun.
+
+function IsOutOfSight (id1,id2)
+Returns true if id2 is out of sight of id1
+
+function IsInAttackSight (id1,id2,[skill])
+Returns true if id2 is in range of attack from id1, using [skill] if supplied
+
+function AttackRange(myid,[[skill])
+Returns the attack range of homun using [skill], if supplied
+
+function BetterMoveToOwner(myid,[range])
+Moves to the closest cell within range of owner. If range is not supplied, it is assumed to be 1.
+The MoveToOwner() builtin function behaves horribly, and should never be used. 
+
+function Closer(id,ox,oy)
+Returns the coordinants of tbe cell adjacent to (ox,oy) that is closest to id. 
+Useful for choosing where to put, say, a skid trap to push an enemy away. 
+
+function ClosestR(myid,target,range)
+Returns the closest cell to the location of [myid] within [range] cells of [target]. 
+Intended for choosing where to move when going to attack.
+
+function DiagonalDist(distance)
+Equivilent to math.floor(math.abs(distance))
+
+--#########################
+--### GetSkill functions###
+--#########################
+
+GetAtkSkill(id)
+Returns a list containing skill id, skill level, and sp consumption of the mercenary's single target offencive skill. Crash is not returned in this list, because the damage output spamming crash is lower than the damage output from using normal attacks. 
+
+ex: 
+local skill,level,sp = GetAtkSkill(MyID)
+
+GetMobSkill(merctype)
+As GetAtkSkill(), but returns a fourth variable, target type:
+0 - Use SkillObject() to cast the skill, targeted on mercenary (magnum break)
+1 - Use SkillObject() to cast the skill, targeted on enemy
+2 - Use SkillArea() to cast the skill (Arrow Shower)
+
+ex
+local skill,level,sp,targettype = GetMobSkill(MyID)
+
+function GetDebuffSkill(myid)
+As GetAtkSkill() only returns the debuff skill, if any, possessed by the mercenary.
+
+GetQuickenSkill(id)
+Returns the ID of the offencive selfbuff skill posessed by the mercenary, the skill level, the sp consumption, and the duration. In the case of homuns, this will return the Filer skill Flitting and the Lif skill Urgent Escape if appropriate.
+
+ex
+local skill,level,sp,duration = GetQuickenSkill(MyID)
+
+GetGuardSkill(id)
+As GetQuickenSkill() only returns the ID of the guard or parry skill posessed by the mercenary. 
+In the case of homuns, this will return Amistr Bullwark if appropriate. 
+
+GetSacrificeSkill(id)
+As GetQuickenSkill() only returns the ID and other perameters for the Sacrifice (aka Devotion) skill posessed by the mercenary.
+
+GetProvokeSkill(id)
+As GetQuickenSkill() only returns the ID and other perameters for the Provoke skill posessed by the mercenary. 
+
+GetPushbackSkill(id)
+As GetMobSkill() only returns the ID and other perameters for the pushback skill (arrow repel or skid trap) posessed by the mercenary
+
+--#########################
+--### Other functions   ###
+--#########################
+function KiteOK(myid)
+Returns 1 if it would make sense for the homun or merc to kite in normal circumstances
+(ie, 1 if it's an archer merc, or a filer or vani with DoNotChase=1.)
+
+function modulo(a,b)
+Returns the remainder of a divided by b, because lua 5.0 doesnt implement a modulo function natively
+
+--#########################
+--### List Utility      ###
+--#########################
+List = {}
+function List.new ()
+function List.pushleft (list, value)
+function List.pushright (list, value)
+function List.popleft (list)
+function List.popright (list)
+function List.clear (list)
+function List.size (list)
+-------------------------------------------------
