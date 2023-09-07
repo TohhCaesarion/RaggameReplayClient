@@ -10,7 +10,9 @@
 
 ### Как запустить
 
-1. Склонируйте репозиторий с Github.
+1. Скачайте с [Google Drive](https://drive.google.com/file/d/1oOt7e0PX01cqoehOabSRM2cwFc3dfbsD/view)
+или с [Mega](https://mega.nz/file/Bp53EZRQ#Xk_i_QcSbxwGSJd3fHsoFQ6WbiZJSordanBfe3-P9aw)
+или склонируйте репозиторий с Github. На гитхабе файлы из data.grf распакованы, чтобы обойти лимит гитхаба на размер файлов.
    
 2. Установите vcredist через **vcredist/install_all.bat**.
 
@@ -49,7 +51,9 @@ This build also includes an archive of over 2000 replay files. These recordings 
 
 ### How to Run
 
-1. Сlone the repository from GitHub.
+1.  Download from [Google Drive](https://drive.google.com/file/d/1oOt7e0PX01cqoehOabSRM2cwFc3dfbsD/view)
+or [Mega](https://mega.nz/file/Bp53EZRQ#Xk_i_QcSbxwGSJd3fHsoFQ6WbiZJSordanBfe3-P9aw)
+or clone from Github. Version on github has .grf data extracted because of Github file size limit.
 
 2. Install vcredist through `vcredist/install_all.bat`.
 
